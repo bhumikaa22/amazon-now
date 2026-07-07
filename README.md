@@ -25,9 +25,3 @@ npm install
 node server.js
 `
 
-### Frontend
-`ash
-cd frontend
-npm install
-npm run dev
-`
