@@ -1,9 +1,9 @@
-const { DatabaseSync } = require("node:sqlite");
+const Database = require("better-sqlite3");
 const path = require("path");
 
-const db = new DatabaseSync(path.join(__dirname, "amazonnow.db"));
-db.exec("PRAGMA journal_mode = WAL");
-db.exec("PRAGMA foreign_keys = ON");
+const db = new Database(path.join(__dirname, "amazonnow.db"));
+db.pragma("journal_mode = WAL");
+db.pragma("foreign_keys = ON");
 
 function init() {
   db.exec(`
@@ -83,23 +83,17 @@ function init() {
       [14, "Bisleri Mineral Water",    "Bisleri",      "1 Litre",  20,  "food",        "low",    "9 min",  "💧", JSON.stringify(["water","drink","bottle","bisleri","mineral","thirsty"])],
       [15, "Kinley Water 2L",          "Kinley",       "2 Litres", 35,  "food",        "low",    "10 min", "💧", JSON.stringify(["water","drink","bottle","kinley","thirsty"])],
     ];
-    db.exec("BEGIN");
-    for (const p of products) insert.run(...p);
-    db.exec("COMMIT");
+
+    const insertMany = db.transaction((rows) => {
+      for (const row of rows) insert.run(...row);
+    });
+    insertMany(products);
     console.log("Seeded 15 products.");
   }
 }
 
 function transaction(fn) {
-  db.exec("BEGIN");
-  try {
-    const result = fn();
-    db.exec("COMMIT");
-    return result;
-  } catch (err) {
-    db.exec("ROLLBACK");
-    throw err;
-  }
+  return db.transaction(fn)();
 }
 
 module.exports = { db, init, transaction };
