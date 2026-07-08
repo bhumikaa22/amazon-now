@@ -1,10 +1,9 @@
 import axios from "axios";
 
 const client = axios.create({
-  baseURL: "http://localhost:4000/api",
+  baseURL: import.meta.env.VITE_API_URL || "https://amazon-backend-td50.onrender.com/api",
 });
 
-// Automatically attach token to every request if it exists
 client.interceptors.request.use((config) => {
   const token = localStorage.getItem("token");
   if (token) {
@@ -13,7 +12,6 @@ client.interceptors.request.use((config) => {
   return config;
 });
 
-// If token expires, log user out automatically
 client.interceptors.response.use(
   (response) => response,
   (error) => {
