@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const client = axios.create({
-  baseURL: import.meta.env.VITE_API_URL || "https://amazon-backend-td50.onrender.com/api",
+  baseURL: "https://amazon-backend-td50.onrender.com/api",
 });
 
 client.interceptors.request.use((config) => {
