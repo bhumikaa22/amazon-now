@@ -113,6 +113,3 @@ App runs at `http://localhost:5173`
 | PORT | Server port (default 4000) |
 | JWT_SECRET | Secret key for signing JWT tokens |
 
-> ⚠️ Never commit your `.env` file — it is listed in `.gitignore`
-
-## Built during HackOn with Amazon 6.0 ⚡
