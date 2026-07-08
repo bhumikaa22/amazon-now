@@ -48,47 +48,6 @@ amazonnow/
 - Node.js v22.5+
 - npm
 
-### 1. Clone the repo
-
-```bash
-git clone https://github.com/bhumikaa22/amazon-now.git
-cd amazon-now
-```
-
-### 2. Backend
-
-```bash
-cd backend
-npm install
-```
-
-Create a `.env` file inside the `backend` folder:
-
-```
-PORT=4000
-JWT_SECRET=your_secret_key_here
-```
-
-Start the server:
-
-```bash
-node server.js
-```
-
-API runs at `http://localhost:4000`
-
-### 3. Frontend
-
-Open a new terminal:
-
-```bash
-cd frontend
-npm install
-npm run dev
-```
-
-App runs at `http://localhost:5173`
-
 ## API Endpoints
 
 | Method | Endpoint | Description |
