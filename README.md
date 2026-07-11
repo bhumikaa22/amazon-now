@@ -4,6 +4,8 @@
 
 ![React](https://img.shields.io/badge/React-Frontend-blue) ![Node](https://img.shields.io/badge/Node.js-Backend-green) ![SQLite](https://img.shields.io/badge/SQLite-Database-orange)
 
+## 🌐 Live Demo: [amazon-now-swart.vercel.app](https://amazon-now-swart.vercel.app)
+
 ## Features
 
 - 🔍 **Natural language search** — type "my phone is dying" and get chargers
