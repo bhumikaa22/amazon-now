@@ -4,7 +4,11 @@ import { signup as signupApi } from "../api/auth";
 
 export default function Signup() {
   const { login } = useAuth();
-  const [form, setForm]   = useState({ name: "", email: "", password: "" });
+  const [form, setForm] = useState({ 
+    name: "", 
+    email: new URLSearchParams(window.location.search).get("email") || "", 
+    password: "" 
+  });
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 

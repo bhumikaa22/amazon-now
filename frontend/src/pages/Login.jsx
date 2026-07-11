@@ -8,20 +8,28 @@ export default function Login() {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
-  async function handleSubmit(e) {
-    e.preventDefault();
-    setError("");
-    setLoading(true);
-    try {
-      const res = await loginApi(form);
-      login(res.data.token, res.data.user);
-      window.location.href = "/";
-    } catch (err) {
-      setError(err.response?.data?.error || "Login failed. Try again.");
-    } finally {
-      setLoading(false);
+async function handleSubmit(e) {
+  e.preventDefault();
+  setError("");
+  setLoading(true);
+  try {
+    const res = await loginApi(form);
+    login(res.data.token, res.data.user);
+    window.location.href = "/";
+  } catch (err) {
+    const msg = err.response?.data?.error || "Login failed. Try again.";
+    setError(msg);
+    // If no account found, redirect to signup after 2 seconds
+    if (err.response?.status === 401 && msg.includes("No account found")) {
+      setError("No account found with this email. Redirecting to sign up...");
+      setTimeout(() => {
+        window.location.href = `/signup?email=${encodeURIComponent(form.email)}`;
+      }, 2000);
     }
+  } finally {
+    setLoading(false);
   }
+}
 
   return (
     <div className="auth-page">
